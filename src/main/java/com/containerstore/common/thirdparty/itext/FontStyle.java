@@ -3,7 +3,7 @@ package com.containerstore.common.thirdparty.itext;
 import com.itextpdf.text.Font;
 
 public enum FontStyle {
-    BOLD(Font.BOLD), NORMAL(Font.NORMAL);
+    BOLD(Font.BOLD), NORMAL(Font.NORMAL), ITALIC(Font.ITALIC), BOLDITALIC(Font.BOLDITALIC);
 
     private final int pdfStyle;
 

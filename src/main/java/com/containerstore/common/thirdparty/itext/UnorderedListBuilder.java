@@ -10,7 +10,8 @@ import static com.google.common.collect.Lists.*;
 
 public class UnorderedListBuilder extends FormatableBuilder<UnorderedListBuilder> {
     private List<String> items = newArrayList();
-    private char symbol = 149;
+//    private char symbol = 149;
+    private char symbol = '\u2022';
     private float size = 10;
 
     public UnorderedListBuilder(List<String> items) {

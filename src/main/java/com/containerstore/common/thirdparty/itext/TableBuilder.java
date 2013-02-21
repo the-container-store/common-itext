@@ -10,6 +10,11 @@ import com.itextpdf.text.pdf.PdfPTable;
 public class TableBuilder extends ElementBuilder {
 
     final PdfPTable pdfTable;
+    int borderWidthRight = 0;
+    int borderWidthLeft = 0;
+    int borderWidthTop = 0;
+    int borderWidthBottom = 0;
+    int borderType = Rectangle.NO_BORDER;
 
     public static TableBuilder table(int numberOfColumns) {
         return new TableBuilder(numberOfColumns);
@@ -28,9 +33,11 @@ public class TableBuilder extends ElementBuilder {
     public TableBuilder addCell(ElementBuilder cellBuilder) {
         Element element = cellBuilder.build();
         if (element instanceof PdfPCell) {
+            setBorder((PdfPCell) element);
             pdfTable.addCell((PdfPCell) element);
         } else {
             PdfPCell cell = new PdfPCell();
+            setBorder(cell);
             cell.addElement(element);
             pdfTable.addCell(cell);
         }
@@ -48,35 +55,66 @@ public class TableBuilder extends ElementBuilder {
     }
 
     public TableBuilder withBorder(float width) {
-        pdfTable.getDefaultCell().setBorderWidth(width);
+        setUniformWidth((int)width);
         return this;
+    }
+
+    private void setUniformWidth(int width) {
+        borderWidthRight = width;
+        borderWidthLeft = width;
+        borderWidthTop = width;
+        borderWidthBottom = width;
+    }
+
+    public void setBorder(PdfPCell cell) {
+        //TODO: support bit wise combinations
+        cell.setBorder(borderType);
+        switch (borderType) {
+            case Rectangle.BOX:
+                cell.setBorderWidth(borderWidthLeft);
+                break;
+            case Rectangle.TOP:
+                cell.setBorderWidthTop(borderWidthTop);
+                break;
+            case Rectangle.BOTTOM:
+                cell.setBorderWidthBottom(borderWidthBottom);
+                break;
+            case Rectangle.RIGHT:
+                cell.setBorderWidthRight(borderWidthRight);
+                break;
+            case Rectangle.LEFT:
+                cell.setBorderWidthLeft(borderWidthLeft);
+                break;
+            default:
+                cell.setBorderWidth(0);
+        }
     }
 
     public TableBuilder withBorder(float width, BorderDirective directive) {
         //TODO: support bit wise combinations
         switch (directive) {
             case ON_ALL_SIDES:
-                pdfTable.getDefaultCell().setBorder(Rectangle.BOX);
-                pdfTable.getDefaultCell().setBorderWidth(width);
+                borderType = Rectangle.BOX;
+                setUniformWidth((int)width);
                 break;
             case ON_TOP:
-                pdfTable.getDefaultCell().setBorder(Rectangle.TOP);
-                pdfTable.getDefaultCell().setBorderWidthTop(width);
+                borderType = Rectangle.TOP;
+                borderWidthTop = (int) width;
                 break;
             case ON_BOTTOM:
-                pdfTable.getDefaultCell().setBorder(Rectangle.BOTTOM);
-                pdfTable.getDefaultCell().setBorderWidthBottom(width);
+                borderType = Rectangle.BOTTOM;
+                borderWidthBottom = (int) width;
                 break;
             case ON_RIGHT:
-                pdfTable.getDefaultCell().setBorder(Rectangle.RIGHT);
-                pdfTable.getDefaultCell().setBorderWidthRight(width);
+                borderType = Rectangle.RIGHT;
+                borderWidthRight = (int) width;
                 break;
             case ON_LEFT:
-                pdfTable.getDefaultCell().setBorder(Rectangle.LEFT);
-                pdfTable.getDefaultCell().setBorderWidthLeft(width);
+                borderType = Rectangle.LEFT;
+                borderWidthLeft = (int) width;
                 break;
             default:
-                pdfTable.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+                borderType = Rectangle.NO_BORDER;
         }
         return this;
     }

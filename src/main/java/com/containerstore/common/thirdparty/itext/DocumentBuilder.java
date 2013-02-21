@@ -105,11 +105,12 @@ public class DocumentBuilder {
     private class PdfPageEventAdapter extends PdfPageEventHelper {
 
         private List<PageEventListener> listeners = newArrayList();
+        int pageNumber = 1;
 
         @Override
         public void onStartPage(PdfWriter writer, Document document) {
             for (PageEventListener each : listeners) {
-                each.onStartPage(DocumentBuilder.this);
+                each.onBeginPage(DocumentBuilder.this, pageNumber++);
             }
         }
 

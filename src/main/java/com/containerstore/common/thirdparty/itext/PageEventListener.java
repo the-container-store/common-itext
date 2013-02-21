@@ -4,7 +4,7 @@ public interface PageEventListener {
 
     void onOpenDocument(DocumentBuilder document);
 
-    void onStartPage(DocumentBuilder document);
+    void onBeginPage(DocumentBuilder document, int pageNumber);
 
     void onEndPage(DocumentBuilder document);
 

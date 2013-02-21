@@ -7,7 +7,7 @@ public class PageEventListenerAdapter implements PageEventListener {
     }
 
     @Override
-    public void onStartPage(DocumentBuilder document) {
+    public void onBeginPage(DocumentBuilder document, int pageNumber) {
     }
 
     @Override

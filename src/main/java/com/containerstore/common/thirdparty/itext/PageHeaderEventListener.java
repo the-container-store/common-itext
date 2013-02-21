@@ -22,7 +22,7 @@ public class PageHeaderEventListener extends PageEventListenerAdapter {
     }
 
     @Override
-    public void onStartPage(DocumentBuilder document) {
+    public void onBeginPage(DocumentBuilder document, int pageNumber) {
         TableBuilder table = buildHeaderTable(document);
         writeTableToDocument(document, table);
     }
