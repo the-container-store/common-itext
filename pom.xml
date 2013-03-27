@@ -4,7 +4,7 @@
 
     <groupId>com.containerstore.common</groupId>
     <artifactId>common-itext</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2-SNAPSHOT</version>
 
     <parent>
         <groupId>com.containerstore.maven.poms</groupId>
