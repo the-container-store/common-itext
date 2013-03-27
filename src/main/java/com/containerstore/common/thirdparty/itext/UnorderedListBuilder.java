@@ -7,42 +7,32 @@ import com.itextpdf.text.Font;
 import java.util.List;
 
 import static com.google.common.collect.Lists.*;
+import static com.itextpdf.text.Font.FontFamily.*;
 
 public class UnorderedListBuilder extends FormatableBuilder<UnorderedListBuilder> {
-    private List<String> items = newArrayList();
-//    private char symbol = 149;
-    private char symbol = '\u2022';
-    private float size = 10;
+    public static final char BULLET = 108;
 
-    public UnorderedListBuilder(List<String> items) {
-        this.items = items;
-    }
+    private final List<String> items = newArrayList();
 
-    public UnorderedListBuilder items(List<String> items) {
-        items.addAll(items);
-        return this;
-    }
-
-    public UnorderedListBuilder bulletSymbol(char symbol) {
-        this.symbol = symbol;
-        return this;
-    }
-
-    public UnorderedListBuilder size(float size) {
-        this.size = size;
-        return this;
+    private UnorderedListBuilder(List<String> items) {
+        this.items.addAll(items);
     }
 
     @Override
     <T extends Element> T  build() {
-        com.itextpdf.text.List unorderedList = new com.itextpdf.text.List(com.itextpdf.text.List.UNORDERED);
+        com.itextpdf.text.List unorderedList = new com.itextpdf.text.List();
+        unorderedList.setListSymbol(bulletChunk());
+
         for (String item : items) {
             unorderedList.add(item);
         }
-        Font font = new Font(Font.FontFamily.SYMBOL, size, Font.NORMAL);
-        Chunk bullet = new Chunk(symbol, font);
-        unorderedList.setListSymbol(bullet);
         return (T) unorderedList;
+    }
+
+    private Chunk bulletChunk() {
+        Font font = new Font(ZAPFDINGBATS, 7);
+        String text = BULLET + "      ";
+        return new Chunk(text, font).setTextRise(1.5f);
     }
 
     public static UnorderedListBuilder unorderedList(String... items) {
