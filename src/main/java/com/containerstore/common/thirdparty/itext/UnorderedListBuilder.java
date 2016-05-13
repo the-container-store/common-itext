@@ -10,7 +10,7 @@ import java.util.List;
 import static com.google.common.collect.Lists.*;
 import static com.itextpdf.text.Font.FontFamily.*;
 
-class UnorderedListBuilder extends FormatableBuilder<UnorderedListBuilder> {
+public class UnorderedListBuilder extends FormatableBuilder<UnorderedListBuilder> {
 
     private static final char BULLET = 108;
 
