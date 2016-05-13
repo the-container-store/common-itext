@@ -41,7 +41,8 @@ public class ParagraphBuilder extends FormatableBuilder<ParagraphBuilder> {
     <T extends Element> T build() {
         Paragraph paragraph = new Paragraph();
         for (PhraseBuilder each : phrases) {
-            paragraph.add(each.build());
+            T build = each.build();
+            paragraph.add(build);
         }
         paragraph.setAlignment(alignment.toPdfAlignment());
         paragraph.setIndentationLeft(indentationLeft);
