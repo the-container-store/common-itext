@@ -4,7 +4,7 @@
 
     <groupId>com.containerstore.common</groupId>
     <artifactId>common-itext</artifactId>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.5-SNAPSHOT</version>
 
     <parent>
         <groupId>com.containerstore.maven.poms</groupId>
@@ -37,6 +37,8 @@
     </dependencies>
     
 </project><!--
+Modified by POM Manipulation Extension for Maven 1.5.4 ( SHA: cb1846fa ) 
+--><!--
 Modified by POM Manipulation Extension for Maven 1.5.4 ( SHA: cb1846fa ) 
 --><!--
 Modified by POM Manipulation Extension for Maven 1.5.4 ( SHA: cb1846fa ) 
