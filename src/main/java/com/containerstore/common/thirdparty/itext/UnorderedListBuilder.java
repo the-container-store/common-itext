@@ -34,7 +34,7 @@ public class UnorderedListBuilder extends FormatableBuilder<UnorderedListBuilder
 
     private Chunk bulletChunk() {
         // bullet size is typically smaller than font
-        Font font = new Font(ZAPFDINGBATS, fontSize - 5);
+        Font font = new Font(ZAPFDINGBATS, fontSize - 6);
         String text = BULLET + "      ";
         return new Chunk(text, font).setTextRise(1.5f);
     }
