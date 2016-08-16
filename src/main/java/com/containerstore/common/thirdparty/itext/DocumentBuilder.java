@@ -41,6 +41,10 @@ public class DocumentBuilder {
         }
     }
 
+    public void newPage() {
+        document.newPage();
+    }
+
     public DocumentBuilder addEventListener(PdfPageEvent event) {
         pdfWriter.setPageEvent(event);
         return this;
