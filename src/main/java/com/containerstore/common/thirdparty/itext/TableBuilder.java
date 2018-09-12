@@ -45,6 +45,12 @@ public class TableBuilder extends ElementBuilder {
         return this;
     }
 
+    public TableBuilder withWidthPercentage(float percentage, Alignment alignment) {
+        pdfTable.setWidthPercentage(percentage);
+        pdfTable.setHorizontalAlignment(alignment.toPdfAlignment());
+        return this;
+    }
+
     public TableBuilder withRelativeWidths(int... relativeWidths) {
         try {
             pdfTable.setWidths(relativeWidths);
